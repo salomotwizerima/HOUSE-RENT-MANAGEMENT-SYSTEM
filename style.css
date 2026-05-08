@@ -1,0 +1,273 @@
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+.minubar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    color: black;
+    position: relative;
+}
+
+/* LEFT (user name) */
+.left {
+    font-weight: bold;
+    color: black;
+}
+
+/* CENTER (links) */
+.center a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+
+/* RIGHT (logout + search) */
+.right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.right input {
+    padding: 5px;
+}
+.minubar a {
+    color: rgb(15, 12, 12);
+    margin: 0 15px;
+    text-decoration: none;
+}
+.minubar a:hover {
+    text-decoration: underline;
+}
+.minubar label {
+    margin-left: 500px;
+}
+
+/* SIDEBAR (red - ibumoso) */
+.card1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 60vh;
+    background-color: whitesmoke;
+    color: rgb(12, 12, 12);
+    text-align: center;
+    padding-top: 20px;
+}
+
+/* IMAGE PROFILE */
+.image {
+    width: 100px;
+    height: 100px;
+    background: white;
+    border-radius: 50%;
+    margin: auto;
+}
+.image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* BUTTONS */
+.card1 button {
+    width: 80%;
+    margin: 10px 0;
+    padding: 10px;
+    border-top-right-radius: 5px;
+}
+.card1 button a {
+    text-decoration: none;
+    color: black;
+    font-weight: 800;
+    font-size: larger;
+
+}
+
+/* CONTENT RIGHT */
+.card2 {
+    margin-left: 20%;
+    margin-top: 70px;
+    padding: 20px;
+}
+
+/* SECTIONS */
+section {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* HOME CARD */
+.card {
+    display: flex;
+    height: 450px;
+    gap: 20px;
+    box-shadow: 0 0 10px #ccc;
+    padding: 20px;
+
+}
+
+.image-section img {
+    width: 700px;
+    height: 100%;
+    
+}
+
+.info-section {
+    flex: 1;
+}
+
+/* ABOUT (houses grid) */
+.houses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.house-card {
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.house-card img {
+    width: 100%;
+}
+
+.house-card p {
+    font-size: 14px;
+}
+
+/* CONTACT */
+.contact-box {
+    max-width: 400px;
+}
+
+.contact-box input,
+.contact-box textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+#info {
+    padding: 20px;
+    background: #f5f5f5;
+}
+
+#info h1, #info h2 {
+    color: black;
+}
+
+#info p, #info li {
+    font-size: 16px;
+}
+
+#clients {
+    padding: 40px;
+    text-align: center;
+    background: #f0f0f0;
+}
+
+.client-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.client-card {
+    width: 200px;
+    background: white;
+    padding: 15px;
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 10px;
+}
+
+.client-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.client-card p {
+    font-size: 14px;
+}
+
+#payment {
+    padding: 40px;
+    text-align: center;
+    background: #f5f5f5;
+}
+
+.payment-box {
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 10px;
+}
+
+.payment-box input,
+.payment-box select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.payment-box button {
+    width: 100%;
+    padding: 12px;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+footer{
+ text-align: center;   
+}
+.payment{
+    body{
+    font-family: Arial;
+    background:#ddd;
+}
+
+.container{
+    width:400px;
+    margin:50px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+}
+
+h1{
+    text-align:center;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #999;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:green;
+    color:white;
+    border:none;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkgreen;
+}
+}

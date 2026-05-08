@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Official House Rent Receipt</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f7fa;
+    padding:30px;
+}
+
+/* RECEIPT */
+.receipt{
+    max-width:850px;
+    margin:auto;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.receipt-header{
+    background:#0b3d91;
+    color:white;
+    padding:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo-circle{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:white;
+    color:#0b3d91;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.receipt-header h1{
+    font-size:26px;
+}
+
+.receipt-header p{
+    font-size:13px;
+    opacity:0.9;
+}
+
+/* CONTENT */
+.content{
+    padding:30px;
+}
+
+/* TITLE */
+.title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.title h2{
+    color:#0b3d91;
+    font-size:28px;
+}
+
+.title p{
+    color:#777;
+    margin-top:5px;
+}
+
+/* BOX */
+.box{
+    background:#f8f9fb;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:25px;
+}
+
+/* FLEX */
+.flex{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+table th{
+    background:#0b3d91;
+    color:white;
+    padding:14px;
+    text-align:left;
+}
+
+table td{
+    padding:14px;
+    border-bottom:1px solid #ddd;
+}
+
+/* STATUS */
+.status{
+    margin-top:20px;
+    background:#eafaf0;
+    color:#28a745;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:bold;
+    font-size:16px;
+}
+
+/* TOTAL */
+.total{
+    text-align:right;
+    margin-top:20px;
+}
+
+.total h2{
+    color:#28a745;
+    font-size:30px;
+}
+
+/* SIGN */
+.sign-area{
+    margin-top:40px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.sign-box{
+    width:250px;
+}
+
+.sign-line{
+    border-top:2px solid #333;
+    margin-top:60px;
+    padding-top:10px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* BUTTONS */
+.buttons{
+    margin-top:35px;
+    display:flex;
+    gap:15px;
+}
+
+button{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.print-btn{
+    background:#0b3d91;
+    color:white;
+}
+
+.home-btn{
+    background:#28a745;
+    color:white;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:25px;
+    color:#777;
+    font-size:14px;
+    border-top:1px solid #eee;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+
+.buttons{
+    flex-direction:column;
+}
+
+body{
+    padding:10px;
+}
+
+}
+
+/* PRINT */
+@media print{
+
+.buttons{
+    display:none;
+}
+
+body{
+    background:white;
+    padding:0;
+}
+
+.receipt{
+    box-shadow:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<script>
+
+/* LOGIN CHECK */
+
+if(!localStorage.getItem("user")){
+
+window.location.href =
+"login.html";
+
+}
+
+</script>
+
+<div class="receipt">
+
+<!-- HEADER -->
+<div class="receipt-header">
+
+<div class="logo">
+
+<div class="logo-circle">
+HR
+</div>
+
+<div>
+
+<h1>
+House Rent
+</h1>
+
+<p>
+Management System
+</p>
+
+</div>
+
+</div>
+
+<div>
+
+<p id="receiptDate"></p>
+
+<p id="receiptId"></p>
+
+</div>
+
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- TITLE -->
+<div class="title">
+
+<h2>
+OFFICIAL PAYMENT RECEIPT
+</h2>
+
+<p>
+Landlord Rent Payment Confirmation
+</p>
+
+</div>
+
+<!-- CUSTOMER -->
+<div class="box flex">
+
+<div>
+
+<h3>
+Tenant Information
+</h3>
+
+<br>
+
+<p>
+<b>Name:</b>
+<span id="customerName"></span>
+</p>
+
+<p>
+<b>Payment Method:</b>
+<span id="paymentMethod"></span>
+</p>
+
+<p>
+<b>Status:</b>
+PAID ✔
+</p>
+
+</div>
+
+<div>
+
+<h3>
+Payment Information
+</h3>
+
+<br>
+
+<p>
+<b>Receipt Number:</b>
+<span id="receiptNumber"></span>
+</p>
+
+<p>
+<b>Payment Date:</b>
+<span id="paymentDate"></span>
+</p>
+
+<p>
+<b>Months Paid:</b>
+<span id="monthsPaid"></span>
+</p>
+
+</div>
+
+</div>
+
+<!-- HOUSE -->
+<div class="box">
+
+<h3>
+House Information
+</h3>
+
+<table>
+
+<tr>
+
+<th>
+House Name
+</th>
+
+<th>
+Location
+</th>
+
+<th>
+Monthly Rent
+</th>
+
+</tr>
+
+<tr>
+
+<td id="houseName"></td>
+
+<td id="houseLocation"></td>
+
+<td id="housePrice"></td>
+
+</tr>
+
+</table>
+
+</div>
+
+<!-- BREAKDOWN -->
+<div class="box">
+
+<h3>
+Payment Breakdown
+</h3>
+
+<table>
+
+<tr>
+
+<th>
+Description
+</th>
+
+<th>
+Amount
+</th>
+
+</tr>
+
+<tr>
+
+<td>
+Monthly Rent × Months
+</td>
+
+<td id="rentAmount"></td>
+
+</tr>
+
+<tr>
+
+<td>
+Number Of Months
+</td>
+
+<td id="monthsTable"></td>
+
+</tr>
+
+<tr>
+
+<td>
+Service Fee
+</td>
+
+<td id="serviceFee"></td>
+
+</tr>
+
+<tr>
+
+<td>
+Tax (18%)
+</td>
+
+<td id="taxAmount"></td>
+
+</tr>
+
+<tr>
+
+<th>
+TOTAL PAID
+</th>
+
+<th id="totalPaid"></th>
+
+</tr>
+
+</table>
+
+<div class="status">
+
+PAYMENT SUCCESSFUL ✔
+
+</div>
+
+</div>
+
+<!-- TOTAL -->
+<div class="total">
+
+<h2 id="grandTotal"></h2>
+
+</div>
+
+<!-- SIGNATURE -->
+<div class="sign-area">
+
+<div class="sign-box">
+
+<div class="sign-line">
+Tenant Signature
+</div>
+
+</div>
+
+<div class="sign-box">
+
+<div class="sign-line">
+Landlord Signature
+</div>
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+<div class="buttons">
+
+<button class="print-btn"
+onclick="window.print()">
+
+Print Receipt
+
+</button>
+
+<button class="home-btn"
+onclick="goHome()">
+
+Back Home
+
+</button>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+© 2026 House Rent Management System |
+Kigali - Rwanda
+
+</div>
+
+</div>
+
+<script>
+
+/* GET DATA */
+
+let booking =
+JSON.parse(
+localStorage.getItem("houseBooking")
+);
+
+if(!booking){
+
+alert("No Receipt Found");
+
+window.location.href =
+"home.html";
+
+}
+
+/* RECEIPT */
+
+let receiptNo =
+"HR-" +
+Math.floor(Math.random()*999999);
+
+/* DATE */
+
+let today =
+new Date().toLocaleString();
+
+/* DISPLAY TOP */
+
+document.getElementById(
+"receiptDate"
+).innerHTML = today;
+
+document.getElementById(
+"receiptId"
+).innerHTML =
+receiptNo;
+
+document.getElementById(
+"receiptNumber"
+).innerHTML =
+receiptNo;
+
+document.getElementById(
+"paymentDate"
+).innerHTML =
+today;
+
+/* CUSTOMER */
+
+document.getElementById(
+"customerName"
+).innerHTML =
+booking.customer.name;
+
+document.getElementById(
+"paymentMethod"
+).innerHTML =
+booking.payment.method;
+
+/* HOUSE */
+
+document.getElementById(
+"houseName"
+).innerHTML =
+booking.house;
+
+document.getElementById(
+"houseLocation"
+).innerHTML =
+booking.location;
+
+/* RENT */
+
+let rent =
+parseFloat(booking.price);
+
+let months =
+booking.months || 1;
+
+/* CALCULATIONS */
+
+let rentTotal =
+rent * months;
+
+let service =
+10000;
+
+let tax =
+rentTotal * 0.18;
+
+let total =
+rentTotal +
+service +
+tax;
+
+/* DISPLAY */
+
+document.getElementById(
+"housePrice"
+).innerHTML =
+rent.toLocaleString()
++ " FRW / Month";
+
+document.getElementById(
+"rentAmount"
+).innerHTML =
+rentTotal.toLocaleString()
++ " FRW";
+
+document.getElementById(
+"monthsPaid"
+).innerHTML =
+months + " Month(s)";
+
+document.getElementById(
+"monthsTable"
+).innerHTML =
+months + " Month(s)";
+
+document.getElementById(
+"serviceFee"
+).innerHTML =
+service.toLocaleString()
++ " FRW";
+
+document.getElementById(
+"taxAmount"
+).innerHTML =
+tax.toLocaleString()
++ " FRW";
+
+document.getElementById(
+"totalPaid"
+).innerHTML =
+total.toLocaleString()
++ " FRW";
+
+document.getElementById(
+"grandTotal"
+).innerHTML =
+"TOTAL: " +
+total.toLocaleString()
++ " FRW";
+
+/* HOME */
+
+function goHome(){
+
+window.location.href =
+"home.html";
+
+}
+
+</script>
+
+</body>
+</html>

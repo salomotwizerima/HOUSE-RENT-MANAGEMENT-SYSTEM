@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>House Payment</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f7f6;
+}
+
+/* HEADER */
+.header1{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#ffffff;
+    padding:15px 25px;
+    border-bottom:1px solid #ddd;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    width:50px;
+    height:50px;
+    background:#0b3d91;
+    color:#fff;
+    font-weight:bold;
+    font-size:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+}
+
+.title h1{
+    font-size:18px;
+    font-weight:600;
+    color:#222;
+}
+
+.title p{
+    font-size:12px;
+    color:#777;
+}
+
+.user-icon{
+    text-align:center;
+    font-size:12px;
+    color:#444;
+}
+
+.user-icon span{
+    display:block;
+    font-size:20px;
+    margin-bottom:3px;
+}
+
+/* CONTAINER */
+.container{
+    max-width:700px;
+    margin:40px auto;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+    overflow:hidden;
+}
+
+/* TOP */
+.header{
+    padding:20px;
+    text-align:center;
+    font-size:1.4rem;
+    font-weight:bold;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+
+/* BACK */
+.back-btn{
+    position:absolute;
+    left:20px;
+    top:22px;
+    color:#0b3d91;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* CONTENT */
+.content{
+    padding:30px;
+}
+
+/* SUMMARY */
+.summary{
+    background:#f8f9fa;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+table th{
+    background:#0b3d91;
+    color:white;
+    padding:12px;
+    text-align:left;
+}
+
+table td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+}
+
+/* PAYMENT METHODS */
+.payment-methods{
+    display:grid;
+    grid-template-columns:
+    repeat(3,1fr);
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.method{
+    border:2px solid #ddd;
+    border-radius:12px;
+    padding:12px;
+    cursor:pointer;
+    transition:0.3s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:90px;
+    background:#fff;
+}
+
+.method img{
+    max-width:80px;
+    max-height:50px;
+    object-fit:contain;
+}
+
+.method.active{
+    border-color:#28a745;
+    background:#eafaf0;
+}
+
+/* INPUTS */
+label{
+    font-size:14px;
+    font-weight:600;
+    display:block;
+    margin-top:12px;
+    color:#444;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    outline:none;
+    font-size:15px;
+}
+
+/* TOTAL */
+.total-box{
+    margin-top:20px;
+    background:#f8f9fa;
+    padding:20px;
+    border-radius:12px;
+}
+
+.total-box p{
+    margin-top:10px;
+    font-size:15px;
+}
+
+.total-box h2{
+    margin-top:15px;
+    color:#28a745;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    background:#28a745;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1f8a38;
+}
+
+#msg{
+    margin-top:15px;
+    text-align:center;
+    color:red;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+
+.payment-methods{
+    grid-template-columns:1fr;
+}
+
+.container{
+    margin:20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<script>
+
+/* LOGIN CHECK */
+
+if(!localStorage.getItem("user")){
+
+window.location.href =
+"login.html";
+
+}
+
+</script>
+
+<!-- HEADER -->
+<header class="header1">
+
+<div class="header-left">
+
+<div class="logo">
+HR
+</div>
+
+<div class="title">
+
+<h1>
+House Rent
+</h1>
+
+<p>
+Management System
+</p>
+
+</div>
+
+</div>
+
+<div class="header-right">
+
+<div class="user-icon">
+
+<span>👤</span>
+
+<p id="username"></p>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- CONTAINER -->
+<div class="container">
+
+<div class="header">
+
+<a class="back-btn"
+href="home.html">
+← Back
+</a>
+
+House Payment
+
+</div>
+
+<div class="content">
+
+<!-- SUMMARY -->
+<div class="summary">
+
+<h3>
+Selected House
+</h3>
+
+<br>
+
+<p>
+<b>House:</b>
+<span id="houseName"></span>
+</p>
+
+<p>
+<b>Location:</b>
+<span id="houseLocation"></span>
+</p>
+
+<p>
+<b>Monthly Rent:</b>
+<span id="housePrice"></span>
+</p>
+
+</div>
+
+<!-- MONTHS -->
+<label>
+How Many Months Do You Want To Rent?
+</label>
+
+<input type="number"
+id="months"
+value="1"
+min="1"
+oninput="calculateTotal()">
+
+<!-- TOTAL -->
+<div class="total-box">
+
+<p>
+Monthly Rent:
+<b id="monthlyRent"></b>
+</p>
+
+<p>
+Months:
+<b id="monthDisplay"></b>
+</p>
+
+<p>
+Service Fee:
+<b id="serviceFee"></b>
+</p>
+
+<p>
+Tax (18%):
+<b id="taxAmount"></b>
+</p>
+
+<h2 id="totalAmount"></h2>
+
+</div>
+
+<br>
+
+<!-- PAYMENT -->
+<h3>
+Choose Payment Method
+</h3>
+
+<br>
+
+<div class="payment-methods">
+
+<div class="method active"
+onclick="setMethod('MTN',this)">
+
+<img src="mtn loggo.png" alt="MTN">
+
+</div>
+
+<div class="method"
+onclick="setMethod('Airtel',this)">
+
+<img src="airtel logo.png" alt="Airtel">
+
+</div>
+
+<div class="method"
+onclick="setMethod('Visa',this)">
+
+<img src="visa logo.png" alt="Visa">
+
+</div>
+
+</div>
+
+<!-- FORM -->
+<div id="paymentForm"></div>
+
+<button onclick="payHouse()">
+Pay Now
+</button>
+
+<div id="msg"></div>
+
+</div>
+
+</div>
+
+<script>
+
+/* USER */
+
+document.getElementById(
+"username"
+).innerHTML =
+localStorage.getItem("user");
+
+/* BOOKING */
+
+let booking =
+JSON.parse(
+localStorage.getItem("houseBooking")
+);
+
+if(!booking){
+
+alert("No House Selected");
+
+window.location.href =
+"home.html";
+
+}
+
+/* HOUSE */
+
+document.getElementById(
+"houseName"
+).innerHTML =
+booking.house;
+
+document.getElementById(
+"houseLocation"
+).innerHTML =
+booking.location;
+
+document.getElementById(
+"housePrice"
+).innerHTML =
+parseFloat(booking.price)
+.toLocaleString()
++ " FRW";
+
+/* RENT */
+
+let rent =
+parseFloat(booking.price);
+
+/* CALCULATE */
+
+function calculateTotal(){
+
+let months =
+parseInt(
+document.getElementById("months")
+.value
+);
+
+if(months < 1){
+
+months = 1;
+
+document.getElementById(
+"months"
+).value = 1;
+
+}
+
+/* CALCULATIONS */
+
+let monthlyTotal =
+rent * months;
+
+let service =
+10000;
+
+let tax =
+monthlyTotal * 0.18;
+
+let total =
+monthlyTotal +
+service +
+tax;
+
+/* DISPLAY */
+
+document.getElementById(
+"monthlyRent"
+).innerHTML =
+monthlyTotal.toLocaleString()
++ " FRW";
+
+document.getElementById(
+"monthDisplay"
+).innerHTML =
+months + " Month(s)";
+
+document.getElementById(
+"serviceFee"
+).innerHTML =
+service.toLocaleString()
++ " FRW";
+
+document.getElementById(
+"taxAmount"
+).innerHTML =
+tax.toLocaleString()
++ " FRW";
+
+document.getElementById(
+"totalAmount"
+).innerHTML =
+"TOTAL: " +
+total.toLocaleString()
++ " FRW";
+
+/* SAVE */
+
+booking.months = months;
+
+booking.totalPaid = total;
+
+localStorage.setItem(
+"houseBooking",
+JSON.stringify(booking)
+);
+
+}
+
+/* INITIAL */
+
+calculateTotal();
+
+/* PAYMENT METHOD */
+
+let method = "MTN";
+
+/* METHOD UI */
+
+function setMethod(m, el){
+
+method = m;
+
+document
+.querySelectorAll(".method")
+.forEach(x =>
+x.classList.remove("active")
+);
+
+el.classList.add("active");
+
+const form =
+document.getElementById(
+"paymentForm"
+);
+
+/* MTN */
+
+if(m === "MTN"){
+
+form.innerHTML = `
+
+<label>
+Full Name
+</label>
+
+<input type="text"
+id="name"
+placeholder="Enter full name">
+
+<label>
+MTN Phone Number
+</label>
+
+<input type="tel"
+id="phone"
+placeholder="07XXXXXXXX"
+maxlength="10">
+
+`;
+
+}
+
+/* AIRTEL */
+
+else if(m === "Airtel"){
+
+form.innerHTML = `
+
+<label>
+Full Name
+</label>
+
+<input type="text"
+id="name"
+placeholder="Enter full name">
+
+<label>
+Airtel Phone Number
+</label>
+
+<input type="tel"
+id="phone"
+placeholder="07XXXXXXXX"
+maxlength="10">
+
+`;
+
+}
+
+/* VISA */
+
+else if(m === "Visa"){
+
+form.innerHTML = `
+
+<label>
+Cardholder Name
+</label>
+
+<input type="text"
+id="name"
+placeholder="Enter cardholder name">
+
+<label>
+Card Number
+</label>
+
+<input type="text"
+id="card"
+placeholder="16 digits"
+maxlength="16">
+
+<label>
+CVV
+</label>
+
+<input type="password"
+id="cvv"
+placeholder="3 digits"
+maxlength="3">
+
+`;
+
+}
+
+}
+
+/* INITIAL METHOD */
+
+setMethod(
+"MTN",
+document.querySelector(".method")
+);
+
+/* PAY */
+
+function payHouse(){
+
+const name =
+document.getElementById("name");
+
+if(!name.value){
+
+document.getElementById(
+"msg"
+).innerHTML =
+"Please fill all fields";
+
+return;
+
+}
+
+/* PHONE VALIDATION */
+
+if(method !== "Visa"){
+
+const phone =
+document.getElementById("phone");
+
+if(phone.value.length !== 10){
+
+document.getElementById(
+"msg"
+).innerHTML =
+"Phone number must be 10 digits";
+
+return;
+
+}
+
+}
+
+/* VISA VALIDATION */
+
+if(method === "Visa"){
+
+const card =
+document.getElementById("card");
+
+const cvv =
+document.getElementById("cvv");
+
+if(card.value.length !== 16){
+
+document.getElementById(
+"msg"
+).innerHTML =
+"Card number must be 16 digits";
+
+return;
+
+}
+
+if(cvv.value.length !== 3){
+
+document.getElementById(
+"msg"
+).innerHTML =
+"CVV must be 3 digits";
+
+return;
+
+}
+
+}
+
+/* SAVE */
+
+booking.customer = {
+
+name:name.value
+
+};
+
+booking.payment = {
+
+method:method,
+status:"Paid",
+date:new Date()
+.toLocaleString()
+
+};
+
+localStorage.setItem(
+"houseBooking",
+JSON.stringify(booking)
+);
+
+/* SUCCESS */
+
+alert(
+"Payment Successful"
+);
+
+/* NEXT */
+
+window.location.href =
+"ticket.html";
+
+}
+
+</script>
+
+</body>
+</html>

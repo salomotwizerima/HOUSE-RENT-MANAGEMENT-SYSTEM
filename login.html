@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login - House Rent Management</title>
+
+<style>
+
+:root{
+    --primary:#0b3d91;
+    --secondary:#00b4ff;
+    --light:#f5f7fa;
+    --dark:#1a1a1a;
+}
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    height:100vh;
+    overflow:hidden;
+    background:#000;
+}
+
+/* BACKGROUND SLIDER */
+.slider{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    top:0;
+    left:0;
+    z-index:-2;
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    opacity:0;
+    transition:1s;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+/* DARK OVERLAY */
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.6);
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* MAIN CONTAINER */
+.container{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* LOGIN BOX */
+.form-box{
+    width:380px;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+    padding:35px;
+    border-radius:20px;
+    color:white;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    animation:popup 0.6s ease;
+}
+
+@keyframes popup{
+
+    from{
+        transform:translateY(40px);
+        opacity:0;
+    }
+
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logo-circle{
+    width:70px;
+    height:70px;
+    background:white;
+    color:var(--primary);
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.logo h1{
+    margin-top:15px;
+    font-size:28px;
+}
+
+.logo p{
+    color:#ddd;
+    margin-top:5px;
+}
+
+/* INPUTS */
+.input-box{
+    margin-top:20px;
+}
+
+.input-box input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+    background:rgba(255,255,255,0.2);
+    color:white;
+    font-size:15px;
+}
+
+.input-box input::placeholder{
+    color:#eee;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    margin-top:25px;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    background:var(--primary);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#06265f;
+    transform:scale(1.02);
+}
+
+/* EXTRA */
+.extra{
+    margin-top:20px;
+    text-align:center;
+}
+
+.extra a{
+    color:#00c6ff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.extra a:hover{
+    text-decoration:underline;
+}
+
+/* ERROR */
+#error{
+    margin-top:15px;
+    color:#ffb3b3;
+    text-align:center;
+}
+
+/* MOBILE */
+@media(max-width:500px){
+
+.form-box{
+    width:100%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND IMAGES -->
+<div class="slider">
+
+    <div class="slide active"
+    style="background-image:url('download (10).jpg');"></div>
+
+    <div class="slide"
+    style="background-image:url('Description A fully furnished house for rent in Kigali-Rusororo Location.jpg');"></div>
+
+    <div class="slide"
+    style="background-image:url('download (4).jpg');"></div>
+
+    <div class="slide"
+    style="background-image:url('download (9).jpg');"></div>
+
+</div>
+
+<div class="overlay"></div>
+
+<!-- LOGIN FORM -->
+<div class="container">
+
+<div class="form-box">
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            HR
+        </div>
+
+        <h1>Login</h1>
+
+        <p>
+            House Rent Management System
+        </p>
+
+    </div>
+
+    <div class="input-box">
+
+        <input type="text"
+        id="loginUser"
+        placeholder="Enter Username">
+
+    </div>
+
+    <div class="input-box">
+
+        <input type="password"
+        id="loginPass"
+        placeholder="Enter Password">
+
+    </div>
+
+    <button onclick="login()">
+        Login
+    </button>
+
+    <div id="error"></div>
+
+    <div class="extra">
+
+        No account?
+        <a href="register.html">
+            Create Account
+        </a>
+
+        <br><br>
+
+        <a href="INDEX.HTML">
+            ← Back Home
+        </a>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+
+/* IMAGE SLIDER */
+
+let slides = document.querySelectorAll(".slide");
+
+let index = 0;
+
+function showSlide(){
+
+    slides.forEach(slide =>
+        slide.classList.remove("active")
+    );
+
+    index++;
+
+    if(index >= slides.length){
+        index = 0;
+    }
+
+    slides[index].classList.add("active");
+
+}
+
+setInterval(showSlide, 4000);
+
+/* LOGIN FUNCTION */
+
+function login(){
+
+    // GET INPUT VALUES
+    let username = document.getElementById("loginUser").value;
+    let password = document.getElementById("loginPass").value;
+
+    // GET SAVED ACCOUNT FROM LOCAL STORAGE
+    let savedUser = localStorage.getItem("username");
+    let savedPass = localStorage.getItem("password");
+
+    // CHECK LOGIN
+    if(username === savedUser && password === savedPass){
+
+        // SAVE CURRENT USER
+        localStorage.setItem("user", username);
+
+        // SUCCESS MESSAGE
+        alert("Login Successful");
+
+        // GO TO HOME PAGE
+        window.location.href = "home.html";
+
+    }else{
+
+        // SHOW ERROR
+        document.getElementById("error").innerHTML =
+        "Invalid Username or Password";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

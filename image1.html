@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House Rent Payment</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#eee;
+}
+
+.container{
+    width:400px;
+    margin:50px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #999;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:green;
+    color:white;
+    border:none;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkgreen;
+}
+
+#message{
+    color:green;
+    text-align:center;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.landlord-box{
+    width:400px;
+    margin:20px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.payment-item{
+    background:#f4f4f4;
+    padding:10px;
+    margin-top:10px;
+    border-left:5px solid green;
+}
+</style>
+</head>
+<body>
+
+<!-- CLIENT PAYMENT FORM -->
+
+<div class="container">
+
+<h1>Pay House Rent</h1>
+
+<form id="paymentForm">
+
+<input type="text" id="fullname" placeholder="Client Name" required>
+
+<input type="text" id="house" placeholder="House Number" required>
+
+<input type="number" id="amount" placeholder="Amount Paid" required>
+
+<select id="paymentMethod" required>
+<option value="">Select Payment</option>
+<option value="Mobile Money">Mobile Money</option>
+<option value="Bank">Bank</option>
+<option value="Cash">Cash</option>
+</select>
+
+<button type="submit">Pay Now</button>
+
+</form>
+
+<p id="message"></p>
+
+</div>
+
+<!-- LANDLORD NOTIFICATION -->
+
+<div class="landlord-box">
+
+<h2>Landlord Payment Notifications</h2>
+
+<div id="notifications"></div>
+
+</div>
+
+<script>
+
+// form
+const form = document.getElementById("paymentForm");
+
+// notifications area
+const notifications =
+document.getElementById("notifications");
+
+form.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+// get values
+let fullname =
+document.getElementById("fullname").value;
+
+let house =
+document.getElementById("house").value;
+
+let amount =
+document.getElementById("amount").value;
+
+let paymentMethod =
+document.getElementById("paymentMethod").value;
+
+// success message
+document.getElementById("message").innerHTML =
+"Payment Successful!";
+
+// create landlord notification
+let paymentBox =
+document.createElement("div");
+
+paymentBox.classList.add("payment-item");
+
+paymentBox.innerHTML = `
+<b>Client:</b> ${fullname}<br>
+<b>House:</b> ${house}<br>
+<b>Amount:</b> $${amount}<br>
+<b>Method:</b> ${paymentMethod}<br>
+<b>Status:</b> Paid Successfully
+`;
+
+// show directly to landlord
+notifications.prepend(paymentBox);
+
+// clear form
+form.reset();
+
+});
+
+</script>
+
+</body>
+</html>
